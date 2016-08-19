@@ -1,0 +1,39 @@
+{
+  "name": "gossbot",
+  "version": "1.0.0",
+  "description": "simple smart desktop bot to help with daily task",
+  "main": "main.js",
+  "dependencies": {
+    "electron-prebuilt": "^1.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "scripts": {
+  "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gossterrible/gossBot.git"
+  },
+  "keywords": [
+    "bot",
+    "electron"
+  ],
+  "author": "Bahati Boniface",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/gossterrible/gossBot/issues"
+  },
+  "homepage": "https://github.com/gossterrible/gossBot#readme",
+  "devDependencies": {
+    "electron-prebuilt": "*"
+  },
+  "dependencies": {
+    "annyang": "*"
+  },
+  "dependencies": {
+    "node-tts-google": "*"
+  }
+}
