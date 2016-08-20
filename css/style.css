@@ -379,4 +379,113 @@ body{
     0% { opacity:1; }
     50% { opacity:0; }
     100% { opacity:1; }
+}.weather-app{
+  float: right;
+}
+.weather-app, .weather-app_main, .weather-app_main__information {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column wrap;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0 auto;
+  width: 400px;
+}
+.weather-app_main {
+  background: #F5DB5C;
+  width: auto;
+  height: 11em;
+  box-shadow: 0px 9px 30px #CCC;
+  border-radius: 10px;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-animation: bounce-in 900ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+          animation: bounce-in 900ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+.weather-app_main__information h1, .weather-app_main__information h2, .weather-app_main__information h3 {
+  color: rgba(43, 45, 66, 0.7);
+  margin: 0.57em 0;
+  font-size: 1.7em;
+}
+.weather-app_main__information img {
+  width: 65px;
+  height: 65px;
+}
+
+@-webkit-keyframes bounce-in {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+iframe {
+  margin-left: 100px;
+	border: 0;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 28%;
+	height: 98%;
+}
+.loading {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.spiner {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  animation: anim-spin 1s infinite ease;
+}
+
+.spiner:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border-top: solid 10px #1b97e8;
+  border-right: solid 10px transparent;
+  border-bottom: solid 10px #ff3c50;
+  border-left: solid 10px transparent;
+  border-radius: 100%;
+}
+
+@keyframes anim-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
