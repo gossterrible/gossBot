@@ -15,7 +15,7 @@ var executablePath = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
 });*/
 // bot configurations
 var CONFIG = {
-    appName: 'GOSS',
+    appName: 'Goss Assitant',
     userName: 'Goss',
     //Bot personality
     voiceRecognitionLanguage: 'en-UK',
