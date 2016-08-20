@@ -1,7 +1,7 @@
 // Require annyang
 const annyang = require('annyang');
 var CONFIG = {
-    appName: 'Samantha OS2',
+    appName: 'Goss Assitant',
     userName: 'Goss',
 
     voiceRecognitionLanguage: 'en-UK',
