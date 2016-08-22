@@ -4,7 +4,6 @@ const annyang = require('annyang');
 const shell = require('electron').shell;
 var child = require('child_process').execFile;
 var executablePath = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
-
 /*child(executablePath, function(err, data) {
     if(err){
        console.error(err);
@@ -15,12 +14,12 @@ var executablePath = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
 });*/
 // bot configurations
 var CONFIG = {
-    appName: 'Goss Assitant',
+    appName: 'GOSS',
     userName: 'Goss',
     //Bot personality
     voiceRecognitionLanguage: 'en-UK',
     voiceSpeakingLanguage: 'UK English Male',
-
+    reqtranslate:translate,
     resHello: "hello",
     resSearch: search,
     redTime:currentTime,
@@ -63,7 +62,7 @@ var quote =function(){
                        var verse =data[0].verse;
                        var  text = data[0].text;
                       document.getElementById('caption').textContent = book +"   "+chapter +"  "+verse +"  " +text;
-                      say(document.getElementById('caption').strings);
+                      say(document.getElementById('caption').textContent);
 
 };
 //get weather infomation
@@ -92,7 +91,12 @@ var weatherApi = function(data) {
   console.log(temp);
   document.getElementById('description').textContent =description;
   console.log(description);
-  say("it is "+temp+" degrees today in "+location+",with a "+description+" sky.")
+
+      if (temp >= 32) document.getElementById('weather-app_main').style.background = '#FF5722' ;
+      else if (temp >= 25) document.getElementById('weather-app_main').style.background = '#FF6F00' ;
+      else if (temp >= 20) document.getElementById('weather-app_main').style.background = '#2196F3' ;
+      else document.getElementById('weather-app_main').style.background = '#3F51B5';
+  say("it is "+temp+" degrees today in "+location+"with a "+description+" sky.")
   setTimeout(function(){ $('.weather-app').fadeOut() }, 10000);
 };
 // say Hello
@@ -151,7 +155,7 @@ var repeatLastSentence = function(){
 var radio =function(){
   var shell = require('electron').shell;
   event.preventDefault();
-  shell.openExternal('http://pinghot.qq.com/pingd?dm=y.qq.com.hot&url=/&hottag=Y_NEW.INDEX.TOPLIST.PLAY4&hotx=9999&hoty=9999&rand=94038');
+  shell.openExternal('https://pingfore.qq.com/pingd?dm=y.qq.com.hot&url=/&hottag=Y_NEW.INDEX.TOPLIST.PLAY4&hotx=9999&hoty=9999&rand=30299');
   shell.openExternal('http://y.qq.com/portal/player.html');
   say('Music for your soul')
 };
@@ -179,8 +183,14 @@ var search =function(tag){
   shell.openExternal('https://www.google.com/search?q=' + tag);
   say('These are the result i could find')
 }
+var translate=function(tag){
+  var shell = require('electron').shell;
+  event.preventDefault();
+  shell.openExternal('http://translate.google.cn/#en/zh-CN/'+tag)
+}
 //verbose commands configurations
 var commands = {
+  'translate *tag':translate,
   'Search for *tag':search,
   'what is hot (Shom me some)(today)':news,
   '(shom me my) emails':emails,
@@ -189,7 +199,7 @@ var commands = {
   'how is the weather(today)':weather,
   'what is your name': name,
   'show me a bible (quote)(verse)':quote,
-  'hello': hello,
+  'hey': hello,
   'good (morning)(evening)(afternoon) ': greeting,
   'goodbye': googbye,
   '(please)(date)(what time is it?) what is the time': currentTime,
@@ -201,17 +211,18 @@ if (annyang) {
   annyang.setLanguage(CONFIG.voiceRecognitionLanguage)
   annyang.addCommands(commands);
   annyang.start();
+  document.getElementById('loading').style.display ="flex";
   console.log('Voice recognition ready');
-  $('.loading').fadeIn();
+  say('hello what can i do for you?');
 }
 var lastSentence = null;
 //callback for lastSentence
 function say(msg, callback) {
   console.log('Pause Goss');
   console.log('Saying: ' + msg);
-  $('.loading').fadeOut();
   lastSentence=msg;
   annyang.abort();
+    document.getElementById('loading').style.display ="flex";
 //error with module
   function voiceErrorCallback() {
       console.log("Voice error");
@@ -219,7 +230,7 @@ function say(msg, callback) {
 
   function voiceEndCallback() {
       console.log('Resume Goss');
-      $('.loading').fadeIn()
+      document.getElementById('loading').style.display ="none";
   }
 
   var parameters = {
@@ -235,6 +246,7 @@ function randomSentence(arr) {
     if (Array.isArray(arr)) return arr[Math.floor(Math.random() * arr.length)];
     return arr;
 }
+
 /*
 var utter = new SpeechSynthesisUtterance();
 utter.text = 'Hello World';
